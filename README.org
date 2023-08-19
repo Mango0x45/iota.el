@@ -1,0 +1,105 @@
+#+TITLE: iota.el
+#+AUTHOR: Thomas Voss
+#+DESCRIPTION: Simple- and easy Emacs enumerations
+
+Iota is a very simple Emacs package that allows you to easily perform
+enumerations.  It makes use of the ~iota-regexp~ variable to match substrings
+within a region.  These substrings are then replaced with incrementing integers,
+although more complex enumeration is also possible.
+
+* Installation
+
+Iota is available through MELPA:
+
+#+BEGIN_SRC elisp
+
+  (use-package iota)
+
+#+END_SRC
+
+It’s recommended however that you bind the Iota functions to keybindings for
+easy access:
+
+#+BEGIN_SRC elisp
+
+  (use-package iota
+    :bind (("C-c i" . #'iota)
+           ("C-c I" . #'iota-complex)))
+
+#+END_SRC
+
+* Usage
+
+One important part of Iota is the ~iota-regexp~ variable.  By default
+~iota-regexp~ is set to ~"\\<N\\>"~, so to create an ordered-list you could
+execute ~iota~ on the following region:
+
+#+BEGIN_EXAMPLE
+
+Before calling ‘iota’:
+
+  N. List item
+  N. Another list item
+  N. Final list item
+
+After calling ‘iota’:
+
+  1. List item
+  2. Another list item
+  3. Final list item
+
+#+END_EXAMPLE
+
+By default the ~iota~ function replaces all matches with an incrementing number
+beginning with 1, however you can begin at any point by specifying the universal
+argument.  For example, to begin the list above at 4, you could run =C-u 4 M-x
+iota RET=.
+
+If for whatever reason however you want something that isn’t increments by 1,
+then you can make use of the ~iota-complex~ function.  ~iota-complex~ works
+mostly the same as ~iota~ except you get prompted for two values.  The first
+value is the initial value to start at.  The second and perhaps more interesting
+value is the function to use to generate the next numerical value.  You can
+provide any valid emacs-lisp expression so long as it evaluates to a function
+that takes one numerical parameter and returns an integer:
+
+#+BEGIN_EXAMPLE
+
+Before calling ‘iota-complex’:
+
+  #define BIT1 N
+  #define BIT2 N
+  #define BIT3 N
+  #define BIT4 N
+  #define BIT5 N
+  #define BIT6 N
+  #define BIT7 N
+  #define BIT8 N
+
+After calling ‘iota-complex’ with ‘initial’ as 1 and ‘function’ as
+‘(lambda (x) (* 2 x))’:
+  
+  #define BIT1 1
+  #define BIT2 2
+  #define BIT3 4
+  #define BIT4 8
+  #define BIT5 16
+  #define BIT6 32
+  #define BIT7 64
+  #define BIT8 128
+
+#+END_EXAMPLE
+
+Or perhaps if you want to enumerate in the negative direction:
+
+#+BEGIN_EXAMPLE
+
+Before calling ‘iota-complex’:
+
+  It started at N and then dropped to N!
+
+After calling ‘iota-complex’ with ‘initial’ as ‘-3’ and ‘function’ as ‘1-’:
+
+  It started at -3 and then dropped to -4!
+
+#+END_EXAMPLE
