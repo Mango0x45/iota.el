@@ -31,26 +31,27 @@
 ;;; Code:
 
 (defcustom iota-regexp "\\<N\\>"
-  "Regular expression to match substrings that should be replaced with the
-accumulator."
+  "Regular expression to match substrings that should be replaced."
   :type '(regexp))
 
 (defun iota (start end &optional initial)
-  "Replace all substrings in the region of START and END that match the regular
-expression defined by ‘iota-regexp’ with incrementing integers beginning with
-INITIAL or 1 if INITIAL is nil.  When called interactively, the universal
-argument can be used to specify INITIAL."
+  "Replace substrings in the region with incrementing integers.
+
+This function replaces all substrings in the region of START and END that match
+the regular expression defined by ‘iota-regexp’ with incrementing integers
+beginning with INITIAL or 1 if INITIAL is nil.  When called interactively, the
+universal argument can be used to specify INITIAL."
   (interactive "*r\np")
-  (iota--internal start end initial #'1+))
+  (iota-complex start end initial #'1+))
 
 (defun iota-complex (start end &optional initial function)
-  "Replace all substrings in the region of START and END that match the regular
-expression defined by ‘iota-regexp’ with the result of calling FUNCTION with the
-argument N which starts at INITIAL and increments by 1 every replacement."
-  (interactive "*r\nnInitial value: \nxFunction: ")
-  (iota--internal start end initial function))
+  "Replace substrings in the region with the result of FUNCTION on a count.
 
-(defun iota--internal (start end initial function)
+This function replaces all substrings in the region of START and END that match
+the regular expression defined by ‘iota-regexp’ with the result of calling
+FUNCTION with the argument N which starts at INITIAL and increments by 1 every
+replacement."
+  (interactive "*r\nnInitial value: \nxFunction: ")
   (let ((m1 (make-marker))
         (m2 (make-marker))
         (initial (or initial 1)))
