@@ -3,7 +3,7 @@
 ;; Copyright © 2023 Thomas Voss
 
 ;; Author: Thomas Voss <mail@thomasvoss.com>
-;; Keywords: accumulator increment
+;; Keywords: abbrev data wp
 ;; URL: https://git.sr.ht/~mango/iota
 ;; Version: 1.0.0
 
