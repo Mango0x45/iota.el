@@ -52,8 +52,8 @@ After calling ‘iota’:
 
 By default the ~iota~ function replaces all matches with an incrementing number
 beginning with 1, however you can begin at any point by specifying the universal
-argument.  For example, to begin the list above at 4, you could run =C-u 4 M-x
-iota RET=.
+argument.  For example, to begin the list above at 4, you could run
+=C-u 4 M-x iota RET=.
 
 If for whatever reason however you want something that isn’t increments by 1,
 then you can make use of the ~iota-complex~ function.  ~iota-complex~ works
