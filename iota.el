@@ -30,8 +30,13 @@
 
 ;;; Code:
 
+(defgroup iota nil
+  "Simple- and easy enumeration creation."
+  :prefix "iota-")
+
 (defcustom iota-regexp "\\<N\\>"
   "Regular expression to match substrings that should be replaced."
+  :group 'iota
   :type '(regexp))
 
 (defun iota (start end &optional initial)
