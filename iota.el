@@ -32,7 +32,8 @@
 
 (defgroup iota nil
   "Simple- and easy enumeration creation."
-  :prefix "iota-")
+  :prefix "iota-"
+  :group 'editing)
 
 (defcustom iota-regexp "\\<N\\>"
   "Regular expression to match substrings that should be replaced."
