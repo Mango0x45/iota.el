@@ -4,7 +4,7 @@
 
 ;; Author: Thomas Voss <mail@thomasvoss.com>
 ;; Keywords: abbrev data wp
-;; URL: https://git.sr.ht/~mango/iota
+;; URL: https://git.sr.ht/~mango/iota.el
 ;; Version: 1.0.0
 
 ;; Permission to use, copy, modify, and/or distribute this software for any
